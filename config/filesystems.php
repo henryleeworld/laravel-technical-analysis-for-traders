@@ -30,11 +30,6 @@ return [
 
     'disks' => [
 
-        'data' => [
-            'driver' => 'local',
-            'root' => storage_path('data'),
-        ],
-
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
@@ -47,6 +42,11 @@ return [
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
             'throw' => false,
+        ],
+
+        'data' => [
+            'driver' => 'local',
+            'root' => storage_path('data'),
         ],
 
         's3' => [

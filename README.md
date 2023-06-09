@@ -1,4 +1,4 @@
-# Laravel 9 交易者技術分析
+# Laravel 10 交易者技術分析
 
 引入 lupecode 的 php-trader-interface 套件來擴增交易者技術分析，技術分析投資者透過使用這些指標工具，讓投資分析更有依據。
 
