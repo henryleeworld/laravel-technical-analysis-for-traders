@@ -22,32 +22,34 @@ class TraderController extends Controller
     }
 
     /**
-     * Accumulation/Distribution Line 累積/派發線是一個考慮到價格和成交量的動能指標。
-     * 成交量指標背後的信念是成交量變化先於價格。很多時候，在股價開始上升前成交量都會在之前大增。
-     * 大部分資金流向指標的目的是想在股價變動前及早發現流入或流出的成交量增加。.
+     * Accumulation/Distribution Line
+     * to determine the flow of money into or out of a security. It should not be confused with the advance/decline line. 
+     * While their initials might be the same, these are entirely different indicators, as are their users. 
+     * The advance/decline line provides insight into market movements and the accumulation/distribution line is of use to traders seeking to measure buy/sell pressure on a security or confirm the strength of a trend.
      */
     public function getChaikinAccumulationDistributionLine() 
     {
         $this->stock = $this->stock[0];
-        echo '今天的最高價：' . $this->stock['high'] . PHP_EOL;
-        echo '今天的最低價：' . $this->stock['low'] . PHP_EOL;
-        echo '今天的收盤價：' . $this->stock['close'] . PHP_EOL;
-        echo '今天的成交量：' . $this->stock['volume'] . PHP_EOL;
-        echo '累積/派發線：' . ($this->trader->chaikinAccumulationDistributionLine([$this->stock['high']], [$this->stock['low']], [$this->stock['close']], [$this->stock['volume']]))[0] . PHP_EOL;
+        echo __('Today\'s highest price: ') . $this->stock['high'] . PHP_EOL;
+        echo __('Today\'s lowest price: ') . $this->stock['low'] . PHP_EOL;
+        echo __('Today\'s close price: ') . $this->stock['close'] . PHP_EOL;
+        echo __('Today\'s trading volume: ') . $this->stock['volume'] . PHP_EOL;
+        echo __('Accumulation/Distribution line: ') . ($this->trader->chaikinAccumulationDistributionLine([$this->stock['high']], [$this->stock['low']], [$this->stock['close']], [$this->stock['volume']]))[0] . PHP_EOL;
     }
 
     /**
-     * 相對強弱指標。
-     * 這個指標主要是透過市場近期漲跌的變化量，衡量近期一段時間內的買盤與賣盤，雙方的相對力量強弱程度。.
+     * Relative Strength Index (RSI)
+     * momentum indicator used in technical analysis.
+     * RSI measures the speed and magnitude of a security's recent price changes to detect overvalued or undervalued conditions in the price of that security.
      */
     public function getRelativeStrengthIndex() 
     {
         $closeAry = array_column($this->stock, 'close');
         foreach ($this->stock as $value) {
-            echo '今天的收盤價：' . $value['close'] . PHP_EOL;
+            echo __('Today\'s close price: ') . $value['close'] . PHP_EOL;
         }
         foreach ($this->trader->relativeStrengthIndex($closeAry, 2) as $value) {
-            echo '相對強弱指標：' . $value . PHP_EOL;
+            echo __('Relative strength index: ') . $value . PHP_EOL;
         }
     }
 }
